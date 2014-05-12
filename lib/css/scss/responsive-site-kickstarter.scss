@@ -1,0 +1,33 @@
+// Project: Responsive Site Kickstarter
+// Updated: 6-08-2013
+
+//==========================================================
+//	Master Sass File
+//==========================================================
+
+// Contains rules to import all project essential Sass partial files
+
+// Contents:
+//	General Sass partials
+//	Site Sass partials
+
+
+
+//	$General Sass partials
+//==========================================================
+
+@import "partials/reset",	// Anthony Short’s Browser reset [https://github.com/anthonyshort/stitch-css/blob/master/stylesheets/stitch/_reset.scss]
+	"partials/variables",
+	"partials/extends",
+	"partials/mixins",
+	"partials/functions";
+
+
+
+//	$Site Sass partials
+//==========================================================
+
+@import "partials/basic",
+	"partials/copy",
+	"partials/layout",
+	"partials/sections";

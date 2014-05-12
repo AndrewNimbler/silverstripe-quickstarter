@@ -1,0 +1,30 @@
+// Project: Responsive Site Kickstarter
+// Updated: 10-08-2013
+
+//==========================================================
+//	Variables Sass Partial
+//==========================================================
+
+// Do not use colors as variable names, this will make future maintainability and color changes simpler
+
+// Contents:
+//	Colors
+//	Fonts
+
+
+
+//	$Colors
+//==========================================================
+
+$background-color: #aaa;
+$text-color: #333;
+$link-color: #00e;
+
+
+
+//	$Fonts
+//==========================================================
+
+$base-font-size: 16px;	// Pixel conversion of the default 100% font-size, used in REM and EM calculations in the mixins partial
+$font-family: "Open Sans", sans-serif;	// Google Fonts and Font Squirrel custom font-family names
+$font-bold-fallback: OpenSansBold;	// Font Squirrel fallback font name for IE 8- compatibility, needs to be in front to work

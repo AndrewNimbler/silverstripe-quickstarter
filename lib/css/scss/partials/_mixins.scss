@@ -1,0 +1,100 @@
+// Project: Responsive Site Kickstarter
+// Updated: 10-08-2013
+
+//==========================================================
+//	Mixins Sass Partial
+//==========================================================
+
+// Recommended to keep prefixes in this mixin partial for easy future maintenance (longest vendor prefix on top, shortest on bottom)
+
+// Contents:
+//	Standards viewport
+//	Old box model
+//	Fallback bold
+//	REM font sizing
+//	EM padding
+
+
+
+//	$Standards viewport
+//==========================================================
+
+// Proper specification for viewport, also fixes snap mode bug in IE 10, from Ian Yates [http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag/]
+
+@mixin viewport($option-width: device-width) {
+	@-ms-viewport {
+		width: $option-width;
+	}
+
+	@-o-viewport {
+		width: $option-width;
+	}
+
+	@viewport {
+		width: $option-width;
+	}
+}
+
+
+
+//	$Old box model
+//==========================================================
+
+// Padding is included in element’s width (not supported in IE 7-)
+
+@mixin box-sizing($option-box: border-box) {
+	* {
+		-webkit-box-sizing: $option-box;
+		-moz-box-sizing: $option-box;
+		box-sizing: $option-box;
+	}
+}
+
+
+
+//	$Fallback bold
+//==========================================================
+
+// Adds bold font-weight for modern browsers and inserts a fallback font-family value for IE 8-
+
+@mixin font-weight-bold {
+	font-family: $font-bold-fallback, $font-family;	// Replaces the first value (Font Squirrel custom font), with the bold version to avoid IE 8- problems
+	font-weight: bold;
+}
+
+
+
+//	$REM font sizing
+//==========================================================
+
+// Calculates font-size in REMs and supplies fallback EMs for older browsers (IE 8-), recommend by Sawyer McFarland Media [http://sawmac.com/2012/01/css-sizing-advice-rems-and-ems/]
+
+@mixin font-size($pixel-size: $base-font-size, $parent-font-size: $base-font-size) {
+	font-size: $pixel-size / $base-font-size + rem;	// Pixel font size ÷ body font size
+
+	.lt-ie9 & {
+		font-size: $pixel-size / $parent-font-size + em;	// Pixel font size ÷ parent font size
+	}
+}
+
+
+
+//	$EM Padding
+//==========================================================
+
+// Adds EM padding for an element as well as the jQuery inserted wrapper used for IE 7 box-sizing, again by Sawyer McFarland Media [http://sawmac.com/2012/01/css-sizing-advice-rems-and-ems/]
+
+@mixin padding($y-padding-size: $base-font-size, $x-padding-size: $base-font-size, $parent-font-size: $base-font-size) {
+	&,
+	.lt-ie8 & .ie7-div-wrapper {	// Remove these nested classes to remove IE 7 support
+		@if $y-padding-size == 0px {	// Statement detects if y-axis padding is 0PX and moves the unit
+			padding: 0 $x-padding-size / $parent-font-size + em;
+
+		} @else if $x-padding-size == 0px {	// If x-axis padding equals 0PX remove the unit
+			padding: $y-padding-size / $parent-font-size + em 0;
+
+		} @else {
+			padding: $y-padding-size / $parent-font-size + em $x-padding-size / $parent-font-size + em;	// Converts padding to EMs
+		}
+	}
+}

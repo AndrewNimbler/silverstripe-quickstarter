@@ -1,0 +1,26 @@
+// Project: Responsive Site Kickstarter
+// Updated: 6-08-2013
+
+//==========================================================
+//	Sections Sass Partial
+//==========================================================
+
+// Contains presentational styles not relating to fonts or grid
+
+// Contents:
+//	Mobile breakpoint
+
+
+
+//	$Mobile breakpoint
+//==========================================================
+
+// No media queries so old devices without a proper JavaScript engine will serve a version most likely to meet the users needs
+
+.author {
+	text-align: center;
+
+	img {	// For clean IE 7 images (remove if IE 7 is unsupported)
+		@extend .ie7-interpolation-bicubic;
+	}
+}

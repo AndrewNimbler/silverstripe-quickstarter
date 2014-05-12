@@ -1,0 +1,300 @@
+// Project: Hunter Business Review Website
+// Updated: 28-09-2013
+
+//==========================================================
+//	Page Sass Partial
+//==========================================================
+
+//
+
+// Contents:
+
+
+
+//	$Mobile breakpoint
+//==========================================================
+
+.col .story-preview {
+	display: none;
+}
+
+.main-content.page {
+	padding-top: 30px;
+
+	.story-pub-details {
+		margin-bottom: 20px;
+	}
+
+	.story-preview .story-pub-details {
+		margin: 0;
+	}
+
+	.social-media {
+		margin-left: -10px;
+		@include clearfix;
+
+		h3 {
+			background-color: #1f2e35;
+			color: #fff;
+			padding-left: 7px;
+			margin-bottom: 12px;
+		}
+
+		a {
+			float: left;
+			margin: 0 0 em(10px, 30px) em(10px, 30px);
+			text-decoration: none;
+
+			@include font-size(30px);
+			@include transition(color 0.2s);
+		}
+
+		h3 {
+			margin-left: em(10px, 14px);
+		}
+
+		.more {
+			@include font-size(35px);
+		}
+	}
+
+	.article-footer {
+		background: $primary-color;
+		color: $background-color;
+		margin-top: em(35px, 18px);
+		padding: em(8px, 18px) em(22px, 18px);
+
+		@include font-size(18px);
+		@include font-weight(bold);
+
+	}
+
+	margin-bottom: 125px;
+}
+
+.story-article {
+	h1 {
+		margin-bottom: em(17px, 34px);
+	}
+
+	.social-media h3 {
+		padding-right: 40px;
+		text-transform: none;
+
+		@include inline-block;
+	}
+}
+
+.tagcloud {
+	margin-left: -20px;
+
+	@include clearfix;
+
+	li {
+		float: left;
+		margin: 0 0 em(13px, 14px) em(20px, 14px);
+	}
+
+	a {
+		background: #f1f3f2;
+		color: #424d56;
+		display: block;
+		line-height: 11px;
+		line-height: rem(11px);
+		padding: em(7px, 11px) em(30px, 11px) em(7px, 14px);
+		position: relative;
+		text-decoration: none;
+
+		@include font-size(11px);
+		@include font-weight;
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: em(-20px, 11px);
+
+			@include css-triangle(8px, 12px, right, #f1f3f2);
+		}
+
+		&:hover {
+			background: darken(#f1f3f2, 3%);
+		}
+
+		&:hover:after {
+			border-left-color: darken(#f1f3f2, 3%);
+		}
+	}
+}
+
+
+
+//	$Desktop breakpoint
+//==========================================================
+
+@media only screen and (min-width: 821px) {
+	.col .story-preview {
+		display: block;
+		margin-bottom: em(40px, 14px);
+		width: auto;
+	}
+}
+
+
+
+//	$Side Navigation
+//==========================================================
+.Page {
+	.mag-contents {
+		padding-top: em(17px, 14px);
+		position: static;
+		width: auto;
+	}
+
+	.mag-pub-details a {
+		color: $text-color;
+	}
+}
+
+.Page,
+.UserDefinedForm {
+	.story-article {
+		.social-media > h3 {
+			display: none;
+		}
+
+		.page-title {
+			display: block;
+		}
+	}
+}
+
+.main-content.page .section-page {
+	margin: 0;
+}
+
+.content-block {
+	@include clearfix;
+}
+
+.content-block-img {
+	max-height: em(400px, 14px);
+	overflow: hidden;
+	padding-bottom: em(12px, 14px);
+	width: pct(450px, 1076px);
+
+	&.img-l {
+		float: left;
+		padding-right: em(12px, 14px); 
+	}
+
+	&.img-r {
+		float: right;
+		padding-left: em(12px, 14px);
+	}
+}
+
+
+
+// Contact Us Form
+#Form_Form,
+#MemberLoginForm_LoginForm {
+	div.text {
+		margin-bottom: em(15px, 14px);
+	}
+
+	input.text {
+		-webkit-appearance: none;
+		background: #f7f7f7;
+		border: 0;
+		font-family: $font-serif;
+		height: em(46px, 14px);
+		line-height: 46px;
+		line-height: rem(46px);
+		padding: 0 em(10px, 14px);
+		width: 35%;
+
+		@include border-radius(4px);
+		@include transition(background 0.2s);
+
+		&:focus {
+			background: darken(#f7f7f7, 3%);
+		}
+	}
+
+	textarea.textarea {
+		-webkit-appearance: none;
+		background: #f7f7f7;
+		border: 0;
+		font-family: $font-serif;
+		height: em(124px, 14px);
+		line-height: 26px;
+		line-height: rem(26px);
+		resize: vertical;
+		padding: em(10px, 14px);
+		width: 35%;
+
+		@include border-radius(4px);
+		@include transition(background 0.2s);
+
+		&:focus {
+			background: darken(#f7f7f7, 3%);
+		}
+	}
+
+	.Actions {
+		margin-top: em(20px, 14px);
+
+		input {
+			-webkit-appearance: none;
+			background-color: $secondary-color;
+			border: 0;
+			color: $background-color;
+			cursor: pointer;
+			height: em(46px, 14px);
+			line-height: 46px;
+			line-height: rem(46px);
+			padding: 0 em(10px, 14px);
+
+			@include border-radius(4px);
+			@include transition(background 0.2s);
+
+			&:hover {
+				background: lighten($secondary-color, 3%);
+			}
+		}
+	}
+
+	.requiredField label:after {
+		content: "*";
+	}
+
+	.message.required {
+		color: #f00;
+
+		@include font-size(12px);
+	}
+}
+
+
+
+// Login Form tweaks
+#MemberLoginForm_LoginForm {
+	.Actions {
+		@include clearfix;
+	}
+
+	.Actions input,
+	#ForgotPassword {
+		float: left;
+	}
+
+	#ForgotPassword {
+		line-height: rem(46px);
+		margin-left: em(20px, 14px);
+	}
+}
+
+.author-profile img {
+	margin-bottom: em(5px, 14px);
+}

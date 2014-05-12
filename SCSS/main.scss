@@ -1,0 +1,54 @@
+// Project: Hunter Business Review Website
+// Updated: 02-10-2013
+
+//==========================================================
+//	Main Sass file
+//==========================================================
+
+// Contains rules to import all project essential Sass files
+
+// Contents:
+//	Import variables
+//	Reusable commands
+//	CSS reset partial
+//	Document setup partial
+//	Site specific partials
+
+
+//	$Import variables
+//==========================================================
+
+@import "config";
+
+
+
+//	$Reusable commands
+//==========================================================
+
+@import "Partials/mixins",
+	"Partials/functions";
+
+
+
+//	$CSS reset partial
+//==========================================================
+
+@import "Partials/reset";	// Anthony Short’s Sass formatted Browser CSS reset [https://github.com/anthonyshort/stitch-css/blob/master/stylesheets/stitch/_reset.scss]
+
+
+
+//	$Document setup partial
+//==========================================================
+
+@import "Partials/base";
+
+
+
+//	$Site specific partials
+//==========================================================
+
+@import "Partials/typography",
+	"Partials/Sections/Includes/header",
+	"Partials/Sections/Layout/homepage",
+	"Partials/Sections/Includes/footer",
+	"Partials/Sections/Layout/page";

@@ -1,0 +1,187 @@
+// Project: Hunter Business Review Website
+// Updated: 07-10-2013
+
+//==========================================================
+//	Footer Sass partial
+//==========================================================
+
+//
+
+// Contents:
+
+
+
+//	$Mobile breakpoint
+//==========================================================
+
+.site-footer {
+	background: $primary-color;
+	padding: em(20px, 14px) pct(50px, 1600px) 0;
+
+	.social-media {
+		margin-bottom: em(20px, 14px);
+		text-align: center;
+
+		& h3 {
+			color: $link-color;
+			margin-bottom: em(13px, 18px);
+			text-transform: uppercase;
+
+			@include font-size(18px);
+			@include font-weight(bold);
+		}
+
+		a {
+			color: $background-color;
+			margin-left: em(20px, 23px);
+			text-decoration: none;
+
+			@include font-size(35px);
+			@include inline-block;
+			@include transition(color 0.2s);
+
+			&:hover {
+				color: mix($background-color, $primary-color, 78%);
+			}
+		}
+
+		.facebook {
+			margin: 0;
+		}
+	}
+}
+
+.contact {
+	margin-bottom: em(10px, 14px);
+	text-align: center;
+
+	& h3 {
+		color: $link-color;
+		text-transform: uppercase;
+
+		@include font-size(18px);
+		@include font-weight(bold);
+	}
+
+	li {
+		color: $background-color;
+
+		&:first-child a {
+			text-decoration: none;
+		}
+	}
+
+	i {
+		margin-right: em(10px, 14px);
+	}
+
+	a {
+		color: $background-color;
+	}
+}
+
+.copyright-legal {
+	text-align: center;
+
+	li {
+		color: mix($background-color, $primary-color, 37%);
+
+		@include font-size(11px);
+
+		&:not(:first-child) {
+			@include inline-block;
+		}
+
+		&:last-child {
+			padding-left: em(5px, 11px);
+
+			&:before {
+				content: "|";
+				padding-right: em(5px, 11px);
+			}
+		}
+	}
+
+	a {
+		color: mix($background-color, $primary-color, 37%);
+	}
+}
+
+#_atssh {	// Addthis
+	display: none;
+}
+
+
+
+//	$Mobile only breakpoint
+//==========================================================
+
+@media only screen and (min-width: 374px) {
+	.copyright-legal li {
+		padding-left: em(5px, 11px);
+
+		@include inline-block;
+
+		&:first-child {
+			padding: 0;
+
+			&:before {
+				content: "";
+				padding: 0;
+			}
+		}
+
+		&:before {
+			content: "|";
+			padding-right: em(5px, 11px);
+		}
+	}
+}
+
+
+
+//	$Desktop breakpoint
+//==========================================================
+
+@media only screen and (min-width: 821px) {
+	.site-footer {
+		@include clearfix;
+
+		.social-media {
+			float: right;
+			margin: 0;
+			text-align: right;
+
+			& h3 {
+				margin-bottom: em(5px, 18px);
+			}
+
+			a {
+				@include font-size(23px);
+			}
+		}
+	}
+
+	.contact {
+		float: left;
+		margin: 0;
+		text-align: left;
+
+		ul {
+			@include clearfix;
+		}
+
+		li {
+			float: left;
+			padding-left: em(20px, 14px);
+
+			&:first-child {
+				padding: 0;
+			}
+		}
+	}
+
+	.copyright-legal {
+		clear: both;
+	}
+}

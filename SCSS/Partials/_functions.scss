@@ -1,0 +1,57 @@
+// Updated: 02-10-2013
+
+//==========================================================
+//	Functions Sass Partial
+//==========================================================
+
+// Create reusable math calculations here, for future maintainability and to keep the code short and sweet
+
+// Contents:
+//	Strip the units
+//	Convert pixels to ems
+//	Rem from a pixel value
+//	Percentage
+
+
+
+//	Strip the units
+//==========================================================
+
+// Eric Meyer’s Unit stripper, removes any unit from a value, which allows inconsistencies with different units or not having units at all [http://stackoverflow.com/questions/12328259/how-do-you-strip-the-unit-from-any-number-in-sass]
+
+@function strip-units($value) {
+	@return $value/($value*0+1);
+}
+
+
+
+//	Convert pixels to ems
+//==========================================================
+
+// Place the function name after the colon in a CSS property and in brackets enter the target and the parent pixel size (seperated by a comma)
+
+@function em($target-size: $base-font-size, $parent-size: $base-font-size) {
+	@return strip-units($target-size)/strip-units($parent-size)+em;
+}
+
+
+
+//	Rem from a pixel value
+//==========================================================
+
+// Rems (or root em) take their size from the root of the document (html tag), meaning you only need to pass the target pixel value to use this function
+
+@function rem($target-size: $base-font-size) {
+	@return strip-units($target-size)/strip-units($base-font-size)+rem;
+}
+
+
+
+//	Percentage
+//==========================================================
+
+// Native percentage function wrapped in a function for naming consistency with other functions, inside the brackets are 2 parameters (desired pixel size and containing element size in pixels) and a comma in the middle
+
+@function pct($target-size: $base-font-size, $parent-size: $base-font-size) {
+	@return percentage(strip-units($target-size)/strip-units($parent-size));
+}

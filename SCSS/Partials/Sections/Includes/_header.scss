@@ -1,0 +1,379 @@
+// Project: Hunter Business Review Website
+// Updated: 08-10-2013
+
+//==========================================================
+//	Header Sass partial
+//==========================================================
+
+//
+
+// Contents:
+
+
+
+//	$Mobile and up breakpoint
+//==========================================================
+
+.site-nav {
+	background: $primary-color;
+	/*min-height: em(66px, 14px);*/
+	min-height: em(54px, 14px);
+	padding-top: em(10px, 14px);
+}
+
+.nav-btn {
+	background: lighten($primary-color, 17%);
+	color: $background-color;
+	left: pct(50px, 1600px);
+	/*line-height: 27px;
+	line-height: rem(27px);
+	padding: em(10px, 27px) em(13px, 27px) em(7px, 27px);*/
+	padding: 2px 10px 3px;
+	.ico-menu {@include font-size(19px);}
+	position: absolute;
+	/*top: em(10px, 27px);*/
+	top: 10px;
+
+	@include border-radius(4px);
+	@include font-size(27px);
+	@include transition;
+
+	&:hover {
+		background: lighten($primary-color, 21%);
+		cursor: pointer;
+	}
+
+	&.open {
+		@include border-radius(0, bottom, left);
+		@include border-radius(0, bottom, right);
+	}
+}
+
+.nav-items {
+	@include transition;
+
+	a {
+		color: $background-color;
+		display: block;
+		font-family: $font-serif;
+		padding: em(12px, 14px) em(20px, 14px);
+		text-decoration: none;
+
+		@include transition(background 0.2s);
+
+		&:hover {
+			background: lighten($primary-color, 21%);
+		}
+	}
+}
+
+.fade {
+	@include opacity(0.2);
+}
+
+.site-search {
+	position: absolute;
+	right: pct(50px, 1600px);
+	top: em(10px, 14px);
+	width: pct(750px, 1600px);
+
+	@include transition(width 0.2s);
+
+	fieldset,
+	#Search {
+		width: 100%;
+	}
+
+	input {
+		background: lighten($primary-color, 17%);
+		border: 0;
+		color: mix(lighten($primary-color, 17%), $background-color, 65%);
+		display: block;
+		font-family: $font-serif;
+		height: em(46px, 14px);	// Other browsers vertical center text [http://stackoverflow.com/questions/326650/vertically-align-text-within-input-field-of-fixed-height-without-display-table#answer-327509]
+		line-height: 46px;	// IE7 vertical center text
+		line-height: rem(46px);
+		padding: 0 em(56px, 14px) 0 em(10px, 14px);
+		width: 100%;
+
+		@include border-radius(4px);
+		@include transition;
+
+		&:focus {
+			background: lighten($primary-color, 21%);
+			color: $background-color;
+		}
+	}
+
+	button {
+		background: darken($secondary-color, 7%);
+		border: 0;
+		color: $background-color;
+		cursor: pointer;
+		line-height: 23px;
+		line-height: rem(23px);
+		padding: em(11px, 23px) em(13px, 23px) em(9px, 23px);
+		position: absolute;
+		right: 0;
+		top: 0;
+
+		@include border-radius(4px);
+		@include font-size(23px);
+		@include transition(background 0.2s);
+
+		&:hover {
+			background: lighten($secondary-color, 1%);
+		}
+	}
+}
+
+.extend {
+	/*width: pct(1125px, 1600px);*/
+	width: pct(300px, 1600px);
+}
+
+/* Remove Later */
+@media only screen and (max-width: 821px) {
+	.site-search {
+		width: pct(450px, 1600px);
+	}
+	.extend {
+		width: pct(600px, 1600px);
+	}
+}
+
+
+
+//	$Mobile only breakpoint
+//==========================================================
+
+@media only screen and (max-width: 821px) {
+	.site-nav {
+		@include clearfix;
+	}
+
+	.nav-items {
+		background: lighten($primary-color, 17%);
+		/*margin: em(56px, 14px) pct(50px, 1600px) em(10px, 14px);*/
+		margin: em(32px, 14px) pct(50px, 1600px) em(10px, 14px);
+		max-height: 0;
+		overflow: hidden;
+
+		@include border-radius(4px);
+		@include border-radius(0, top, left);
+
+		a {
+			text-align: center;
+		}
+
+		&.open {
+			max-height: em(450px, 14px);
+		}
+	}
+}
+
+
+
+//	$Desktop and up breakpoint
+//==========================================================
+
+@media only screen and (min-width: 821px) {
+	.nav-btn {
+		display: none;
+	}
+
+	.nav-items {
+		display: block;
+
+		@include clearfix;
+
+		li {
+			float: left;
+			margin-bottom: em(10px, 14px);
+			padding-left: pct(50px, 1600px);
+		}
+
+		a {
+			padding: em(3px, 14px) em(10px, 14px);
+
+			@include border-radius(4px);
+		}
+	}
+}
+
+
+
+// MESSY STYLING TO GET IT DONE
+.site-header {
+	@include clearfix;
+}
+
+.logo-weather-ad-wrapper {
+	height: em(125px, 14px);
+	margin: em(10px, 14px);
+	padding: 0 em(20px, 14px);
+}
+
+.logo-wrapper {
+	font-size: 0;
+	height: 125px;
+	padding: 0 20px;
+	text-align: center;
+	width: pct(250px, 1600px);
+
+	@include inline-block;
+
+	.logo {
+		max-width: 230px;
+		vertical-align: middle;
+		width: 100%;
+
+		@include inline-block;
+	}
+
+	&:before {
+		content: "";
+		height: 100%;
+		margin-right: -0.25em;
+		vertical-align: middle;
+
+		@include inline-block;
+	}
+}
+
+.site-header .ad-block {
+	font-size: 0;
+	height: 125px;
+	margin: 0;
+	padding: 0 12px;
+	text-align: center;
+	width: pct(1100px, 1600px);
+
+	@include inline-block;
+
+	a {
+		max-width: 728px;
+		vertical-align: middle;
+		width: 100%;
+
+		@include inline-block;
+	}
+
+	&:before {
+		content: "";
+		height: 100%;
+		margin-right: -0.25em;
+		vertical-align: middle;
+
+		@include inline-block;
+	}
+}
+
+.site-search {
+	button {
+		line-height: 17px;
+		line-height: rem(17px);
+		padding: em(6px, 17px) em(10px, 17px);
+
+		@include font-size(17px);
+	}
+}
+
+.weather {
+	height: em(125px, 14px);
+	overflow: hidden;
+	width: pct(250px, 1600px);
+
+	@include inline-block;
+}
+
+@media only screen and (max-width: 821px) {
+	.logo-wrapper,
+	.weather {
+		width: 50%;
+	}
+
+	.logo-wrapper {
+		height: em(125px, 14px);
+	}
+
+	.weather {
+	}
+
+	.site-header .ad-block {
+		padding: 0;
+		width: 100%;
+	}
+}
+
+
+#SearchForm_SearchForm {
+	position: absolute;
+	overflow: hidden;
+	right: pct(50px, 1600px);
+	top: em(10px, 14px);
+	width: 40%;
+
+	@include transition(width 0.2s);
+
+	input[type="text"] {
+		background: lighten($primary-color, 17%);
+		border: 0;
+		color: mix(lighten($primary-color, 17%), $background-color, 65%);
+		display: block;
+		font-family: $font-serif;
+		height: em(32px, 14px);
+		padding: em(7px, 14px) em(46px, 14px) em(7px, 14px) em(10px, 14px);
+		width: 100%;
+
+		@include border-radius(4px);
+		@include transition;
+
+		&:focus {
+			background: lighten($primary-color, 21%);
+			color: $background-color;
+		}
+	}
+
+	input[type="submit"] {
+		-webkit-appearance: none;
+		background: darken($secondary-color, 7%);
+		border: 0;
+		cursor: pointer;
+		padding: em(6px, 17px) em(10px, 17px);
+		position: absolute;
+		right: 0;
+		top: 0;
+		color: $background-color;
+		content: "\e001";
+		font-family: $font-icon;
+		line-height: 20px;
+		line-height: rem(20px);
+
+		@include font-size(17px);
+		@include icon-font;
+		@include border-radius(4px);
+		@include transition(background 0.2s);
+
+		&:hover {
+			background: lighten($secondary-color, 1%);
+		}
+	}
+	&.extend {
+	width: 50%;
+}
+}
+
+@media only screen and (min-width: 821px) {
+	#SearchForm_SearchForm {
+		width: pct(200px, 1600px);
+	}
+
+	#SearchForm_SearchForm.extend {
+		width: pct(500px, 1600px);
+	}
+
+	.nav-items {
+		padding-right: pct(250px, 1600px);
+	}
+}

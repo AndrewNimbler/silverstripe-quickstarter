@@ -1,0 +1,112 @@
+// Project: Hunter Business Review Website
+// Updated: 05-10-2013
+
+//==========================================================
+//	Configration Sass file
+//==========================================================
+
+// Viewport
+$viewport-content: device-width;
+
+// Box Sizing
+$box-model: border-box;
+
+
+// 
+// Basic Fonts
+//
+
+$base-font-size: 16;
+$default-line-height: 26;
+$body-font-size: 14;
+
+// Fonts Stack
+
+$font-sans: "Droid Sans", Helvetica, Arial, sans-serif;
+$font-serif: "Droid Serif", "Times New Roman", Times, serif;
+$font-icon: "FontAwesomeIcoMoon", "Zapf Dingbats", Wingdings, fantasy;
+
+// Font Stack Bold
+
+$font-sans-bold: nth($font-sans, 1)+" Bold", $font-sans;
+$font-serif-bold: nth($font-serif, 1)+" Bold", $font-serif;
+
+// Defaults for bold mixin
+
+$font-weight-family: $font-sans-bold;
+
+// default body font family
+$default-font-body: $font-sans;
+
+
+// Fonts Paths
+
+$font-sans-pathname: unquote("../Fonts/Droid-Sans/Droid-Sans");
+$font-serif-pathname: unquote("../Fonts/Droid-Serif/Droid-Serif");
+$font-icon-pathname: unquote("../Fonts/FontAwesomeIcoMoon/FontAwesomeIcoMoon");
+
+// Defaults for mixin
+$font-face-family: nth($font-sans, 1);
+$font-face-url: $font-sans-pathname;
+$icon-font-family: $font-icon;
+
+
+// Icon list
+$icon-classname-list: ico-menu, ico-search, ico-facebook, ico-twitter, ico-linkedin, ico-email1, ico-squareplus, ico-plus, ico-minus, ico-chevronright, ico-phone, ico-fax, ico-email2;
+$icon-unicode-list: "\e000", "\e001", "\e002", "\e003", "\e004", "\e005", "\e006", "\e007", "\e008", "\e009", "\e010", "\e011", "\e012";
+
+// Images - IE 7
+
+$ie7-image-resampling: bicubic;
+
+// Default border radius
+$default-border-radius: 4px;
+
+// Default opacity
+$default-opacity: 0;
+
+// Default Text Overflow
+$default-text-overflow: clip;
+
+// Default Drop Shadow
+$default-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+// Default transition
+$default-transition: all 0.2s ease-out;
+
+// Default rgba
+$default-rgba: 255, 255, 255, 0.2;
+
+// Default gradient
+$default-gradient: #fff, #000;
+
+// 
+// Colors
+//
+$background-color: #fff;
+$primary-color: #1f2d34; // Dark grey blue
+$secondary-color : #5aa0ce; // bright light blue
+//$tertiary-color : #7C7E82; // Lighter grey
+//$alternate-color : #FEFAF7; // Off-white
+$link-color: #579bc8;
+$text-color: #424d56; 
+
+
+//	$Responsive Breakpoints
+//==========================================================
+
+$mobile: "only screen and (max-width : 320px)" !default;
+$large-mobile: "only screen and (max-width : 600px)" !default;
+$small-tablet: "only screen and (max-width : 768px)" !default;
+$tablet: "only screen and (max-width : 820px)" !default;
+//$small-desktop: "only screen and (max-width : 1024px)" !default;
+$small-desktop-up: "only screen and (min-width : 821px)" !default;
+$medium-desktop: "only screen and (max-width : 1440px)" !default;
+$large-desktop: "only screen and (min-width : 1441px)" !default;
+
+$handheld-size: "only screen and (max-width : 600px)" !default;
+$tablet-size: "only screen and (max-width : 1024px)" !default;
+$desktop-size: "only screen and (min-width : 1025px)" !default; 
+
+$landscape: "only screen and (orientation: landscape)" !default;
+$portrait: "only screen and (orientation: portrait)" !default;

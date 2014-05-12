@@ -1,0 +1,90 @@
+// Updated: 25-09-2013
+
+//==========================================================
+//	Base Sass Partial
+//==========================================================
+
+// Place base page styles below, avoid putting in classes that are inside the body tag
+
+// Contents:
+//	Viewport rule
+//	Box sizing property
+//	Old box model
+//	Icon typography
+//	Page styling
+
+
+
+//	$Viewport rule
+//==========================================================
+
+// Needed for IE 10 in snap mode and is standards compliant
+
+@include viewport;
+
+
+
+//	$Old box model
+//==========================================================
+
+// Enables old school box model for browsers (minus IE 7)
+
+@include box-sizing;
+
+
+
+//	$Old IE font face
+//==========================================================
+
+// Most of Google Fonts catalogue lack the IE font format, Font Squirrel usually mirrors a version of the web font for old IE
+
+@include font-face(nth($font-sans, 1), $font-sans-pathname);
+@include font-face(nth($font-sans-bold, 1), $font-sans-pathname#{-bold});
+
+@include font-face(nth($font-serif, 1), $font-serif-pathname);
+@include font-face(nth($font-serif-bold, 1), $font-serif-pathname#{-bold});
+
+
+
+//	$Icon typography
+//==========================================================
+
+// Compiled the following web icon set using the IcoMoon online tool [http://icomoon.io/app/]
+
+@include font-face(nth($font-icon, 1), $font-icon-pathname, nth($font-icon, 1));
+
+$icon-classnames-appended: ();	// Empty list variable for the each and for rules below
+@each $value in $icon-classname-list {	// GitHub Gist snippet for prepending and appending strings to list items [https://gist.github.com/metaskills/3170386]
+	$list: unquote(".#{$value}:before");
+	$icon-classnames-appended: append($icon-classnames-appended, $list, comma);
+}
+
+#{$icon-classnames-appended} {	// Sets font family and rendering touch ups for all icons
+	@include icon-font;
+}
+
+@for $i from 1 through length($icon-classnames-appended) {	// Outputs each icon name as a selector with the appropriate content property unicode character
+	#{nth($icon-classnames-appended, $i)} {
+		content: nth($icon-unicode-list, $i);
+	}
+}
+
+
+
+//	$Page styling
+//==========================================================
+
+* {
+	vertical-align: top;
+}
+
+body {
+	background: $background-color;
+}
+
+img {
+	max-width: 100%;	// Makes sure images resize and don't escape their containers
+	*width: 100%;	// IE 7 doesn't support max width, so a star hacked (to reduce CSS bloat) 100 percent width fallback is used
+
+	@include interpolation-mode;
+}

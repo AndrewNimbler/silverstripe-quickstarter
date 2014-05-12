@@ -1,0 +1,354 @@
+// Updated: 25-09-2013
+
+//==========================================================
+//	Mixins Sass Partial
+//==========================================================
+
+// Recommended to keep vendor prefixes inside this partial for easy future maintainability (prefixes should be ordered by most characters on top, least on the bottom)
+
+// Contents:
+//	Standards viewport
+//	Box sizing property
+//	Custom font embedding
+//	Bold with fallback
+//	Icon fonts settings
+//	Clear images for IE 7
+//	Inline block hack
+//	Rounded corners
+//	Opacity for all
+//	Kellum hide text method
+//	Truncate text overflow
+//	Element drop shadow
+//	CSS3 transitions
+//	Rem Font Size with pixel backup
+//	Transparent background color
+//	Linear cross browser gradients
+//	Micro clearfix hack
+//	Webkit text gradients
+//	Pure CSS triangles
+
+
+
+//	$Standards viewport
+//==========================================================
+
+// Proposed specification for viewport, also fixes a IE 10 snap mode bug
+
+@mixin viewport($width: $viewport-content) {	// auto | device-height | device-width | length | percentage
+	@-ms-viewport {
+		width: $width;
+	}
+
+	@-o-viewport {
+		width: $width;
+	}
+
+	@viewport {
+		width: $width;
+	}
+}
+
+
+
+//	$Box sizing property
+//==========================================================
+
+// Border and padding are included in an element’s width (not supported in IE 7)
+
+@mixin box-sizing($box-sizing: $box-model) {	// border-box | content-box | padding-box
+	* {
+		-webkit-box-sizing: $box-sizing;
+		-moz-box-sizing: $box-sizing;
+		box-sizing: $box-sizing;
+	}
+}
+
+
+
+//	$Custom font embedding
+//==========================================================
+
+// Embeds an open source custom font, leave the SVG font name argument empty to load font for IE 7 and 8 only
+
+@mixin font-face($font-family: $font-face-family, $url: $font-face-url, $svg-font-name: null) {	// Font stack Sass variable, URL to custom font including filename (excluding extension), null | 1, font id located inside svg font file
+	@if $svg-font-name {
+		@font-face {	// Fontspring’s bulletproof face face rule [http://www.fontspring.com/blog/further-hardening-of-the-bulletproof-syntax]
+			font-family: $font-family;
+			src: url("#{$url}.eot?#iefix") format("embedded-opentype"),	// IE 6 to 8, the query string hash iefix is a fix for multiple src paths
+				url("#{$url}.woff") format("woff"),	// Modern browsers (standards approved format)
+				url("#{$url}.ttf") format("truetype"),	// Safari pre 5, Android and iOS 4.2 plus
+				url("#{$url}.svg##{$svg-font-name}") format("svg");	// Legacy format for iOS 3.2 and up
+		}
+	} @else {
+		@font-face {	// Google Fonts FAQ page lists IE 6 plus as a supported browser, but in practice most of the font catalogue don't have IE’s required font format
+			font-family: $font-family;
+			src: url("#{$url}.eot");
+		}
+	}
+}
+
+
+
+//	$Bold with fallback
+//==========================================================
+
+// Simplifies adding font weights when dealing with Font Squirrel and old IE, also avoids faux weights [http://coding.smashingmagazine.com/2013/02/14/setting-weights-and-styles-at-font-face-declaration/]
+
+@mixin font-weight($font-weight: bold, $font-family: $font-weight-family) {	// 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | bold | bolder | lighter | normal, bold font fallback list
+	font-weight: $font-weight;
+
+	@if $font-weight == 700 or 800 or 900 or bold or bolder {
+		.lt-ie9 & {
+			font-family: $font-weight-family;
+			font-weight: normal;
+		}
+	}
+}
+
+
+
+//	$Icon fonts settings
+//==========================================================
+
+// Common styling for icon fonts, with tweaks for some browsers [http://gomakethings.com/icon-fonts/]
+
+@mixin icon-font($font-family: $icon-font-family) {
+	font-family: $font-family;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;	// Improves the clarity of the icon font
+	font-style: normal;
+	font-weight: normal;
+	speak: none;	// Should not be read aloud by screen readers (not to be trusted, icons are in the private use area so they won't be read anyway)
+	text-rendering: optimizeLegibility;	// Better kerning in Firefox and IE 9 upwards
+}
+
+
+
+//	$Clear images for IE 7
+//==========================================================
+
+// Fixes poor image quality in IE 7 [http://msdn.microsoft.com/en-us/library/ie/ms530822(v=vs.85).aspx]
+
+@mixin interpolation-mode($interpolation-mode: $ie7-image-resampling) {	// bicubic | nearest-neighbor
+	*-ms-interpolation-mode: $interpolation-mode;
+}
+
+
+
+//	$Inline block hack
+//==========================================================
+
+// Sets display to inline block and adds properties for IE 5.5 to 7 emulation
+
+@mixin inline-block {
+	display: inline-block;
+	*display: inline;	// Star hack to save a couple of bits
+	zoom: 1;	// Zoom triggers has layout in old IE, allowing the above display inline to function like an inline block
+}
+
+
+
+//	$Rounded corners
+//==========================================================
+
+// Give any element round corners, set the y and x position arguments to effect only one corner
+
+@mixin border-radius($radius: $default-border-radius, $y-position: null, $x-position: null) {	// Desired border radius, null | 1, bottom | top, left | right
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;	// Stop background spilling out of corner(s)
+
+	@if $y-position == null and $x-position == null {
+		-webkit-border-radius: $radius;
+		-moz-border-radius: $radius;
+		border-radius: $radius;
+	} @else {
+		-webkit-border-#{$y-position}-#{$x-position}-radius: $radius;
+		-moz-border-radius-#{$y-position}#{$x-position}: $radius;
+		border-#{$y-position}-#{$x-position}-radius: $radius;
+	}
+}
+
+
+
+//	$Opacity for all
+//==========================================================
+
+// Transparency working in all versions of IE and modern browsers
+
+@mixin opacity($opacity: $default-opacity) {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{percentage($opacity/1)})";	// IE 8 plus
+	filter: alpha(opacity=percentage($opacity/1));	// IE 5.5 and higher
+	opacity: $opacity;
+	zoom: 1;
+}
+
+
+
+//	$Kellum hide text method
+//==========================================================
+
+// Better performance than the text indent negative 9999 technique, hides text for cases when it can't be removed completely [http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/]
+
+@mixin hide-text {
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+}
+
+
+
+//	$Truncate text overflow
+//==========================================================
+
+// Limited to one line of text, either cut off or with ellipses or another character tacked onto the end
+
+@mixin text-overflow($text-overflow: $default-text-overflow) {	// clip | ellipsis | string
+	overflow: hidden;
+	-webkit-text-overflow: $text-overflow;
+	-moz-text-overflow: $text-overflow;
+	text-overflow: $text-overflow;
+	white-space: nowrap;
+}
+
+
+
+//	$Element drop shadow
+//==========================================================
+
+// Applies outer or inner drop shadows to a box element, rule accepts 1 or 2 values (2nd value separated by a comma) [http://www.css3.info/preview/box-shadow/]
+
+@mixin box-shadow($value-1: $default-box-shadow, $value-2: null) {	// Type inset for the proceeding values to apply a inner shadow (leave blank for no inner shadow), offset shadow on x axis, offset y position, blur, spread distance, rgba or hex color
+	@if $value-2 == null {
+		-webkit-box-shadow: $value-1;
+		-moz-box-shadow: $value-1;
+		box-shadow: $value-1;
+	} @else {
+		-webkit-box-shadow: $value-1, $value-2;
+		-moz-box-shadow: $value-1, $value-2;
+		box-shadow: $value-1, $value-2;
+	}
+}
+
+
+
+//	$CSS3 transitions
+//==========================================================
+
+// Creates an animations between CSS properties when they change, mixin doesn't allow multiple comma separated values
+
+@mixin transition($value: $default-transition) {	// CSS property targeted (use all for multiple properties), duration in seconds or milliseconds, cubic-bezier(0-1, 0-1, 0-1, 0-1) | ease | ease-in | ease-in-out | ease-out | linear, Delay before animation begins (formatted in s or ms)
+	-webkit-transition: $value;
+	-moz-transition: $value;
+	-o-transition: $value;
+	transition: $value;
+}
+
+
+
+//	$Rem Font Size with pixel backup
+//==========================================================
+
+// Calculates font size using rems
+
+@mixin font-size($font-size: $base-font-size) {
+	font-size: strip-units($font-size)+px;	// Enables pixel value for old IE and applies the correct unit no matter what
+	font-size: rem($font-size);
+}
+
+
+
+//	$Transparent background color
+//==========================================================
+
+// background color alpha for all browsers, IE support comes with the following caveats, filters reduce font clarity and iframe embedding of the whole site makes links become unclickable [http://kilianvalkhof.com/2010/css-xhtml/how-to-use-rgba-in-ie/]
+
+@mixin background-color-rgba($red: nth($default-rgba, 1), $green: nth($default-rgba, 2), $blue: nth($default-rgba, 3), $alpha: nth($default-rgba, 4)) {
+	background-color: transparent;	// Clears background in older IEs to avoid conflict with filters
+	background-color: rgba($red, $green, $blue, $alpha);	// Correct for new browsers
+	-ms-filter:	"progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str(rgba($red, $green, $blue, $alpha))}',endColorstr='#{ie-hex-str(rgba($red, $green, $blue, $alpha))}')";	// IE 8
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str(rgba($red, $green, $blue, $alpha))}',endColorstr='#{ie-hex-str(rgba($red, $green, $blue, $alpha))}');	// IE 5.5 and up
+	zoom: 1;
+}
+
+
+
+//	$Linear cross browser gradients
+//==========================================================
+
+// Simple top to bottom gradients, working anywhere with a background color if it doesn't [http://www.colorzilla.com/gradient-editor/]
+
+@mixin gradient($from: nth($default-gradient, 1), $to: nth($default-gradient, 2)) {
+	background-color: $from;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $from), color-stop(100%, $to));	// Chrome 10, Safari 4 plus
+	background-image: -webkit-linear-gradient(top, $from 0%, $to 100%);	// Chrome 10 and Safari 5.1 up
+	background-image: -moz-linear-gradient(top, $from 0%, $to 100%);	// Firefox 3.6 upwards
+	background-image: -ms-linear-gradient(top, $from 0%, $to 100%);	// IE 10 consumer preview
+	background-image: -o-linear-gradient(top, $from 0%, $to 100%);	// Opera 11.10 plus
+	background-image: linear-gradient(to bottom, $from 0%, $to 100%);	// W3C standard
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($from)}',endColorstr='#{ie-hex-str($to)}',GradientType=0)";	// IE 8 and 9
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($from)}',endColorstr='#{ie-hex-str($to)}',GradientType=0);	// IE 5.5 to 8
+}
+
+
+
+//	$Micro clearfix hack
+//==========================================================
+
+// Nicolas Gallagher’s updated clear fix, best placed on the containing element of floated children to clear them to restore background and height [http://nicolasgallagher.com/micro-clearfix-hack/]
+
+@mixin clearfix {
+	zoom: 1;
+
+	&:before, &:after {
+		content: "";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+
+
+//	$Webkit text gradients
+//==========================================================
+
+// Clean and progressive way to enhance text for webkit based browsers, other browsers are supplied a color instead [http://css-tricks.com/snippets/css/gradient-text/]
+
+@mixin text-gradient($from: nth($default-gradient, 1), $to: nth($default-gradient, 2)) {
+	-webkit-background-clip: text;
+	background-image: -webkit-linear-gradient(top, $from 0%, $to 100%);
+	color: $from;
+	-webkit-text-fill-color: transparent;
+	text-shadow: none;	// So text gradients and text shadows don't mix, they have transparency issues
+}
+
+
+
+//	$Pure CSS triangles
+//==========================================================
+
+// Adds a non image triangle to any element (empty is recommended), a tags need a container overflow otherwise the area outside the triangle is hoverable and clickable [http://minimalmonkey.com/sass-triangle-mixin/]
+
+@mixin css-triangle($width, $height, $direction, $color) {	// x length of triangle, y height, bottom | left | right | top, hex or rgba color
+	display: block;
+	height: 0;
+	width: 0;
+
+	@if ($direction == top) {
+		border: $width outset transparent;
+		border-bottom: $height solid $color;
+	} @else if ($direction == right) {
+		border: $height outset transparent;
+		border-left: $width solid $color;
+	} @else if ($direction == bottom) {
+		border: $width outset transparent;
+		border-top: $height solid $color;
+	} @else if ($direction == left) {
+		border: $height outset transparent;
+		border-right: $width solid $color;
+	}
+}
